@@ -30,10 +30,20 @@ class BinaryTree(object):
             return value
         self._insert(value, self.root)
 
+    def _if_exist(self, value, cur_node):
+        if value > cur_node.value:
+            return self._if_exist(value, cur_node.right)
+        elif value < cur_node.value:
+            return self._if_exist(value, cur_node.left)
+        else:
+            return True
 
-tree = BinaryTree()
-tree.insert(8)
-tree.insert(10)
-tree.insert(5)
-tree.insert(6)
-tree.insert(4)
+    def if_exist(self, value):
+        if self.root is None:
+            return False
+        if value == self.root:
+            return True
+        found = self._if_exist(value, self.root)
+        if found:
+            return True
+        return False
